@@ -4,6 +4,46 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="The CloudAdvisory offers expert-led Cloud & DevOps training, consulting, and AWS certifications with real-world projects and hands-on learning." />
+    <meta name="keywords" content="AWS, Azure, DevOps, Cloud Consulting, Cloud Training, Pravin Mishra" />
+    <meta name="author" content="Pravin Mishra" />
+    <meta property="og:title" content="The CloudAdvisory – Upskill with Cloud & DevOps Experts" />
+    <meta property="og:description"
+        content="Join 20K+ learners on their Cloud journey. Hands-on AWS and DevOps bootcamps designed by an AWS Authorized Instructor." />
+    <meta property="og:image" content="https://www.thecloudadvisory.com/assets/preview.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.thecloudadvisory.com" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166992443-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-166992443-1');
+    </script>
+
+    <!-- Meta Pixel (Facebook) -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '591598162417830');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=591598162417830&ev=PageView&noscript=1" /></noscript>
+
     <title>The CloudAdvisory – Cloud & DevOps Experts</title>
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -21,6 +61,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#bootcamps">Bootcamps</a></li>
+                <li><a href="#pravinmishra">Lead Instructor</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -130,7 +171,7 @@
     </section>
 
     <!-- Lead Instructor Section -->
-    <section id="instructor" class="white-section">
+    <section id="pravinmishra" class="white-section">
         <div class="instructor-content">
             <div class="instructor-image">
                 <img src="assets/instructor.jpg" alt="Pravin Mishra – Lead Instructor" />
@@ -200,17 +241,17 @@
         </div>
     </section>
 
-
-    <!-- Contact Section -->
+    <!-- Contact Section (Enhanced with working submission) -->
     <section id="contact" class="blue-section">
         <div class="contact-content">
             <div class="form-section">
                 <h2>You are just one step away!</h2>
                 <p>Fill the form, I will send you course details.</p>
-                <form>
-                    <input type="text" placeholder="Enter full name" required />
-                    <input type="email" placeholder="Enter email address" required />
-                    <textarea placeholder="Name of the course you are applying for." required></textarea>
+                <form id="contact-form">
+                    <input type="text" placeholder="Enter full name" name="name" id="name-input" required />
+                    <input type="email" placeholder="Enter email address" name="email" id="email-input" required />
+                    <textarea placeholder="Name of the course you are applying for." name="message" id="message-input"
+                        required></textarea>
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -219,6 +260,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -243,6 +285,43 @@
         </div>
         <p class="copyright">© 2025 The CloudAdvisory – All rights reserved.</p>
     </footer>
+
+    <!-- Footer stays the same -->
+
+    <!-- Script for form submission -->
+    <script>
+        function submitToAPI(e) {
+            e.preventDefault();
+            const URL = "https://9lbzv4r3hh.execute-api.us-east-1.amazonaws.com/prod/contact-us";
+            const data = {
+                name: document.getElementById("name-input").value,
+                email: document.getElementById("email-input").value,
+                message: document.getElementById("message-input").value
+            };
+
+            fetch(URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Thanks for contacting us, we will get back to you soon");
+                        document.getElementById("contact-form").reset();
+                        location.reload();
+                    } else {
+                        throw new Error("Network response was not ok.");
+                    }
+                })
+                .catch(error => {
+                    alert("Submission failed. Please try again later.");
+                });
+        }
+
+        document.getElementById("contact-form").addEventListener("submit", submitToAPI);
+    </script>
 
 
     <script src="script.js"></script>
