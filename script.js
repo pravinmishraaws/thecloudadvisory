@@ -1,5 +1,10 @@
 let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
+
+// Only include .slide elements and skip any that also have .hidden-slide
+const slides = Array.from(document.querySelectorAll('.slide')).filter(slide => !slide.classList.contains('hidden-slide'));
+
+// Immediately show the first visible slide
+showSlide(currentSlide);
 
 function showSlide(index) {
     slides.forEach((slide, i) => {
